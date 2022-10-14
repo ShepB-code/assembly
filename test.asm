@@ -13,9 +13,14 @@ string    BYTE    40 DUP(?)
 
 
 .CODE
-_MainProc PROC
-    mov yourMouth, myDick
-    input     input, string, 40
+_MainProc PROD
+
+
+    cmp ecx, 0
+    je
+
+    sub eax, eax
+    ret
 
 _MainProc ENDP
 END
