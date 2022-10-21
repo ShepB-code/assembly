@@ -3,4 +3,4 @@ project(assembly)
 
 set(CMAKE_CXX_STANDARD 14)
 
-add_executable(assembly P3_1_ShepardBerry.asm)
+add_executable(assembly P3_1_ShepardBerry.asm SeqSearch.cpp)
