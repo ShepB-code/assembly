@@ -2,5 +2,4 @@ cmake_minimum_required(VERSION 3.23)
 project(assembly)
 
 set(CMAKE_CXX_STANDARD 14)
-
-add_executable(assembly P3_1_ShepardBerry.asm SeqSearch.cpp)
+add_executable(assembly P7_0_ShepardBerry.cpp P7_2_ShepardBerry.cpp)
