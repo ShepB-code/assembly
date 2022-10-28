@@ -1,12 +1,33 @@
-// Author: Shepard Berry
-// Assignment Title : P8_0, "Sort Three"
-// Assignment Description: Sort three integers in ascending order
-// Due Date: 10-28-2022
-// Date Created: 10-26-2022
-// Date Last Modified: 10-26-2022
+/*
+* Author: Shepard Berry
+* Assignment Title: P8_0, "Sort Three"
+* Assignment Description: Sort three integers
+* Due Date: 10-28-2022
+* Date Created: 10-26-2022
+* Date Last Modified: 10-28-2022
+*/
 
+/*
+ * Data Abstraction:
+ *   Three integers are declared
+ * Input:
+ *   User enters values for the three integers
+ * Process:
+ *   Three integers are sorted in ascending order
+ * Output:
+ *   The integers are displayed in sorted order
+ * Assumptions:
+ *   Assume all values are entered correctly
+*/
 #include <iostream>
 using namespace std;
+
+/*
+ * description: Sort three integers in ascending
+ * return: void
+ * precondition: Three integers are declared
+ * postcondition: Three integers are sorted in ascending order
+*/
 void __declspec (naked) asmSortThree(int&, int&, int&) {
     __asm {
         push ebp            // preserve base point
@@ -41,14 +62,27 @@ NEXT:   cmp ebx, ecx        // compare val 2 and val 3
     }
 }
 
+/*
+ * description: main function for sorting three numbers
+ * return: void
+ * precondition: none
+ * postcondition: Three integers are output in sorted order
+*/
 int main() {
+    // OUTPUT
     int num1, num2, num3;
+
+    // INPUT
     cout << "Enter 3 numbers: ";
     cin >> num1 >> num2 >> num3;
-    cout << endl;
-    cout << "Numbers before sorting: " << num1 << " " << num2 << " " << num3 << endl;
+    cout << num1 << " " << num2 << " " << num3 << endl;
+
+    // PROCESS
     asmSortThree(num1, num2, num3);
-    cout << "Numbers after sorting: " << num1 << " " << num2 << " " << num3 << endl;
+
+    // OUTPUT
+    cout << "Your three values, in ascending order:" << endl;
+    cout << num1 << " " << num2 << " " << num3 << endl;
 
     return 0;
 }
