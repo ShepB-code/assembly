@@ -9,31 +9,35 @@
 using namespace std;
 void __declspec (naked) asmSortThree(int&, int&, int&) {
     __asm {
-      mov eax, [esp + 4]  // move address of num1 into scratch
-      mov eax, [eax]      // move value at address into scratch
-      mov ebx, [esp + 8]  // move address of num1 into scratch
-      mov ebx, [ebx]      // move value at address into scratch
-      mov ecx, [esp + 12] // move address of num1 into scratch
-      mov ecx, [ecx]      // move value at address into scratch
+        push ebp            // preserve base point
+        mov ebp, esp        // set new base pointer
+        mov eax, [ebp + 8]  // move address of num1 into scratch
+        mov eax, [eax]      // move value at address into scratch
+        mov ebx, [ebp + 12]  // move address of num1 into scratch
+        mov ebx, [ebx]      // move value at address into scratch
+        mov ecx, [ebp + 16] // move address of num1 into scratch
+        mov ecx, [ecx]      // move value at address into scratch
 
 
-      cmp eax, ebx        // compare val 1 and val 2
-      jl NEXT             // jump to next if val 1 < val 2 (in right position)
-      xchg eax, ebx       // swap values if val 1 > val 2
-NEXT: cmp ebx, ecx        // compare val 2 and val 3
-      jl DONE             // jump to done if val 2 < val 3
-      xchg ebx, ecx       // swap values if val 2 > val 3
-      cmp eax, ebx        // compare val 1 and val 2
-      jl DONE             // jump to DONE if val 1 < val 2
-      xchg eax, ebx       // swap values if val 1 > val 2
+        cmp eax, ebx        // compare val 1 and val 2
+        jl NEXT             // jump to next if val 1 < val 2 (in right position)
+        xchg eax, ebx       // swap values if val 1 > val 2
+
+NEXT:   cmp ebx, ecx        // compare val 2 and val 3
+        jl DONE             // jump to done if val 2 < val 3
+        xchg ebx, ecx       // swap values if val 2 > val 3
+        cmp eax, ebx        // compare val 1 and val 2
+        jl DONE             // jump to DONE if val 1 < val 2
+        xchg eax, ebx       // swap values if val 1 > val 2
  DONE:
-      mov edx, [esp + 4]  // mov address of num 1 into scratch
-      mov [edx], eax      // mov smallest value in value at address
-      mov edx, [esp + 8]  // mov address of num 2 into scratch
-      mov [edx], ebx      // mov middle value in value at address
-      mov edx, [esp + 12] // mov address of num 3 into scratch
-      mov [edx], ecx      // mov largest value in value at address
-      ret
+        mov edx, [ebp + 8]  // mov address of num 1 into scratch
+        mov [edx], eax      // mov smallest value in value at address
+        mov edx, [ebp + 12]  // mov address of num 2 into scratch
+        mov [edx], ebx      // mov middle value in value at address
+        mov edx, [ebp + 16] // mov address of num 3 into scratch
+        mov [edx], ecx      // mov largest value in value at address
+        pop ebp             // restore base pointer
+        ret
     }
 }
 
