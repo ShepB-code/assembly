@@ -29,7 +29,7 @@ const int MAX = 100;
  * precondition: A string is declared
  * postcondition: All alphabetic characters are changed to a different case
 */
-void __declspec (naked) switchCase(char[]) {
+void __declspec (naked) asmSwitchCase(char[]) {
     __asm {
             push ebp            // preserve base point
             mov ebp, esp        // set new base pointer
@@ -82,7 +82,7 @@ int main() {
     cout << str << endl;
 
     // PROCESS
-    switchCase(str);
+    asmSwitchCase(str);
 
     // OUTPUT
     cout << "Your string, after it is converted:" << endl;
