@@ -4,7 +4,7 @@
  * Assignment Description: Switch the case of every alphabetic character
  * Due Date: 11-4-2022
  * Date Created: 11-1-2022
- * Date Last Modified: 11-1-2022
+ * Date Last Modified: 11-3-2022
 */
 
 /*
@@ -39,18 +39,18 @@ void __declspec (naked) asmSwitchCase(char[]) {
 
             mov ebx, [ebp + 8]  // establish ptr to first character
 
-    TOP:    mov eax, [ebx]      // move value at address into scratch
+    TOP:    mov al, [ebx]      // move value at address into scratch
             cmp al, '\0'       // compare char to null
             je DONE             // jump to DONE if char == null
 
             cmp al, 'A'        // compare char to 'A'
-            jl NEXT             // jump to NEXT if char < 'A'
+            jb NEXT             // jump to NEXT if char < 'A'
             cmp al, 'Z'        // compare char to 'Z'
-            jle FOUND           // jump to FOUND if char <= 'Z'
+            jbe FOUND           // jump to FOUND if char <= 'Z'
             cmp al, 'a'        // compare char to 'a'
-            jl NEXT             // jump to NEXT if char < 'a'
+            jb NEXT             // jump to NEXT if char < 'a'
             cmp al, 'z'        // compare char to 'z'
-            jg NEXT             // jump to NEXT if char > 'z'
+            ja NEXT             // jump to NEXT if char > 'z'
     FOUND:  xor al, 20h
             mov [ebx], al
     NEXT:   inc ebx
